@@ -8,14 +8,12 @@ const app = express();
 
 const PORT = process.env.PORT;
 
-startServer();
 
 // Middleware setup
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
-// // Endpoint to get products from the database
 app.get("/products", async (req, resp) => {
     try {
         const client = await connect();
@@ -34,7 +32,7 @@ app.use('/api',userRoute);
 app.listen(PORT, () => console.log(`Server is running at ${PORT} port!`.magenta.italic));
 
 
-async function startServer() {
+const startServer = async () => {
     try {
         const client = await connect();
         const databaseName = client.db('ecommerce').databaseName;
@@ -46,3 +44,5 @@ async function startServer() {
         process.exit(1);
     }
 }
+
+startServer();

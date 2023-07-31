@@ -1,4 +1,3 @@
-// ./models/User.js
 class User {
     constructor(name, email, password, admin) {
       this.name = name;
