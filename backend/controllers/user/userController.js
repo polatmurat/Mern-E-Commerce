@@ -1,8 +1,7 @@
 const { validationResult } = require('express-validator');
 const connect = require('../../config/db');
-const jwt = require('jsonwebtoken');
-const hashedPassword = require('../../services/authService');
-
+const User = require('../../models/User');
+const { hashedPassword, createToken } = require('../../services/authService');
 
 const register = async (req, res) => {
     const errors = validationResult(req);
@@ -20,9 +19,13 @@ const register = async (req, res) => {
 
                 const cryptedPassword = await hashedPassword(password);
 
-                await userCollection.insertOne({ name, email, password: cryptedPassword, admin: true });
+                const user = new User(name, email, cryptedPassword, true);
 
-                return res.status(201).json({ msg: 'User registered successfully.' });
+                await userCollection.insertOne(user);
+
+                const token = await createToken(user);
+
+                return res.status(201).json({ msg: 'User registered successfully.', token: token });
             } else {
                 return res.status(401).json({ errors: [{ msg: `${email} is already taken.` }] });
             }

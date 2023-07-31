@@ -1,4 +1,5 @@
 const bcyrpt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const hashedPassword = async (password) => {
     const salt = await bcyrpt.genSalt(10);
@@ -6,5 +7,14 @@ const hashedPassword = async (password) => {
     return hashed;
 }
 
+const createToken = async (user) => {
+    return await jwt.sign({ id: user._id, name: user.name }, process.env.JWT_SECRET, {
+        expiresIn: '30d',
 
-module.exports = hashedPassword
+    })
+}
+
+module.exports = {
+    hashedPassword,
+    createToken
+}
