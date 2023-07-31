@@ -1,14 +1,33 @@
+// ./controllers/userController.js
+
 const { validationResult } = require('express-validator');
+const UserModal = require('../../models/User');
+const connect = require('../../config/db');
 
-
-const register = (req, res) => {
+const register = async (req, res) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        // Hata olması durumunda hataları gönder
-        return res.status(400).json({ errors: errors.array() });
+    if (errors.isEmpty()) {
+        const { name, email, password } = req.body;
+        try {
+            const client = await connect();
+            const userCollection = client.db('ecommerce').collection('users');
+
+            const emailExist = await userCollection.findOne({ email });
+            if (!emailExist) {
+                // User does not exist, proceed with registration
+                await userCollection.insertOne({ name, email, password, admin: false });
+
+                return res.status(201).json({ msg: 'User registered successfully.' });
+            } else {
+                return res.status(401).json({ errors: [{ msg: `${email} is already taken.` }] });
+            }
+        } catch (error) {
+            console.log(error.message);
+            return res.status(500).json("Server internal error!");
+        }
     } else {
-        // Hata yoksa başarılı kayıt mesajını gönder
-        return res.status(200).json({ message: "Registration Succesful!" });
+        // Validations failed
+        return res.status(400).json({ errors: errors.array() });
     }
 };
 
