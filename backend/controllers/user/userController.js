@@ -1,8 +1,8 @@
-// ./controllers/userController.js
-
 const { validationResult } = require('express-validator');
-const UserModal = require('../../models/User');
 const connect = require('../../config/db');
+const jwt = require('jsonwebtoken');
+const hashedPassword = require('../../services/authService');
+
 
 const register = async (req, res) => {
     const errors = validationResult(req);
@@ -10,12 +10,17 @@ const register = async (req, res) => {
         const { name, email, password } = req.body;
         try {
             const client = await connect();
-            const userCollection = client.db('ecommerce').collection('users');
+
+            const userCollection = client.db('ecommerce').collection('user');
 
             const emailExist = await userCollection.findOne({ email });
+
             if (!emailExist) {
                 // User does not exist, proceed with registration
-                await userCollection.insertOne({ name, email, password, admin: false });
+
+                const cryptedPassword = await hashedPassword(password);
+
+                await userCollection.insertOne({ name, email, password: cryptedPassword, admin: true });
 
                 return res.status(201).json({ msg: 'User registered successfully.' });
             } else {
