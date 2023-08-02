@@ -4,6 +4,7 @@ import Products from "../pages/dashboard/Products";
 import Private from "./Private";
 import Public from "./Public";
 import Categories from "../pages/dashboard/Categories";
+import CreateCategory from "../pages/dashboard/CreateCategory";
 
 const Routing = () => {
   return (
@@ -34,6 +35,14 @@ const Routing = () => {
             element={
               <Private>
                 <Categories />
+              </Private>
+            }
+          />
+          <Route
+            path="create-category"
+            element={
+              <Private>
+                <CreateCategory />
               </Private>
             }
           />

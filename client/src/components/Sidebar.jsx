@@ -37,12 +37,12 @@ const Sidebar = ({ side, closeSidebar }) => {
         <li className="px-4 py-3 cursor-pointer transition-all text-white flex items-center hover:bg-palette2">
           <BsPeople className="mr-2 text-lg inline-block" />
           <Link to="/dashboard/products" className="text-base capitalize">
-            Orders
+            Customers
           </Link>
         </li>
         <li className="px-4 py-3 cursor-pointer transition-all text-white flex items-center hover:bg-palette2">
           <BsBarChart className="mr-2 text-lg inline-block" />
-          <Link to="/dashboard/products" className="text-base capitalize">
+          <Link to="/dashboard/categories" className="text-base capitalize">
             Categories
           </Link>
         </li>
