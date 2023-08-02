@@ -3,6 +3,7 @@ import LoginAdmin from "../pages/auth/LoginAdmin";
 import Products from "../pages/dashboard/Products";
 import Private from "./Private";
 import Public from "./Public";
+import Categories from "../pages/dashboard/Categories";
 
 const Routing = () => {
   return (
@@ -28,8 +29,15 @@ const Routing = () => {
               </Private>
             }
           />
+          <Route
+            path="categories"
+            element={
+              <Private>
+                <Categories />
+              </Private>
+            }
+          />
         </Route>
-        {/* auth/login-admin */}
       </Routes>
     </BrowserRouter>
   );
