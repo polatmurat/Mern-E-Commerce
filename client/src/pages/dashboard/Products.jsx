@@ -1,10 +1,8 @@
-import Sidebar from "../../components/Sidebar";
+import Wrapper from "./Wrapper";
 
 const Products = () => {
   return (
-    <>
-      <Sidebar />
-    </>
+    <Wrapper>Murat Polat</Wrapper>
   );
 };
 
