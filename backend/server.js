@@ -3,7 +3,7 @@ const dotenv = require('dotenv').config();
 const colors = require('colors');
 const cors = require('cors');
 const connect = require('./config/db');
-const userRoute = require('./routes/users/userRoute');
+const userRoute = require('./routes/userRoute');
 const app = express();
 
 const PORT = process.env.PORT;

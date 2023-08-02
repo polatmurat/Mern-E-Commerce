@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
-const connect = require('../../config/db');
-const User = require('../../models/User');
-const { hashedPassword, createToken, comparePassword } = require('../../services/authService');
+const connect = require('../config/db');
+const User = require('../models/User');
+const { hashedPassword, createToken, comparePassword } = require('../services/authService');
 
 const register = async (req, res) => {
     const errors = validationResult(req);
@@ -51,7 +51,7 @@ const login = async (req, res) => {
 
             const user = await userCollection.findOne({ email: email });
 
-            console.log(user);
+            // console.log(user);
 
             if (user) {
                 if (await comparePassword(password, user.password)) {
