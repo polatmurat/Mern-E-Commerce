@@ -58,7 +58,7 @@ const LoginAdmin = () => {
         {errors.length > 0 &&
           errors.map((error, key) => (
             <div key={key}>
-              <p className="bg-red-100 text-red-700 p-3 mb-2 rounded-sm text-sm font-medium">
+              <p className="alert-danger">
                 {error.msg}
               </p>
             </div>

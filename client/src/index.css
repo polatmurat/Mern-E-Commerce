@@ -15,4 +15,13 @@
         @apply bg-indigo-600 w-1/4 p-3 cursor-pointer text-white rounded-lg;
 
     }
+    .alert-danger {
+        @apply bg-red-100 text-red-700 px-3 py-4 mb-2 border-l-8 border-red-700 rounded-sm text-sm font-medium;
+    }
+    .alert-success {
+        @apply bg-green-200 text-slate-800 px-3 py-4 mb-5 border-l-8 border-green-800 rounded-sm text-sm font-medium;
+    }
+    .pagination-link {
+        @apply border border-gray-900 text-gray-500 text-sm font-medium block py-2 px-4 bg-gray-900;
+    }
 }

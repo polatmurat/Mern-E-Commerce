@@ -1,13 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authService from '../features/auth/authService';
 import authReducer from './reducers/authReducer';
-
+import categoryService from '../features/category/categoryService';
+import globalReducer from './reducers/globalReducer';
 
 export const store = configureStore({
   reducer: {
     [authService.reducerPath]: authService.reducer,
-    "authReducer": authReducer 
+    [categoryService.reducerPath]: categoryService.reducer,
+    authReducer: authReducer, // No need to put this in brackets as it's a string identifier
+    globalReducer: globalReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authService.middleware), // RTK-Query Middleware ekleme
-
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
+    .concat(authService.middleware)
+    .concat(categoryService.middleware), // Add the middleware for the categoryService here
 });
