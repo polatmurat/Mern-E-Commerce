@@ -10,7 +10,6 @@
         @apply w-full bg-palette2 p-3 rounded outline-none text-white;
 
     }
-
     .btn-indigo {
         @apply bg-indigo-600 w-1/4 p-3 cursor-pointer text-white rounded-lg;
 
@@ -23,5 +22,8 @@
     }
     .pagination-link {
         @apply border border-gray-900 text-gray-500 text-sm font-medium block py-2 px-4 bg-gray-900;
+    }
+    .pagination-active {
+        @apply bg-gray-400 text-gray-900;
     }
 }

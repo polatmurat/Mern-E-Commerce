@@ -71,10 +71,10 @@ const Categories = () => {
                         {category.name}
                       </td>
                       <td className="p-3 capitalize text-sm font-normal text-gray-400">
-                        <button>edit</button>
+                        <Link to={`/dashboard/update-category/${category._id}`} className="bg-palette4 w-1/4 px-6 py-2 cursor-pointer text-white rounded-md">Edit</Link>
                       </td>
                       <td className="p-3 capitalize text-sm font-normal text-gray-400">
-                        <button>delete</button>
+                        <button className="bg-palette2 w-1/4 px-2 py-2 cursor-pointer text-white rounded-md">Delete</button>
                       </td>
                     </tr>
                   ))}

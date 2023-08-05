@@ -21,7 +21,10 @@ const Pagination = ({ page, perPage, count, path }) => {
     for (let i = startLoop; i <= endLoop; i++) {
       allLinks.push(
         <li key={i}>
-          <Link to={`/${path}/${i}`} className={`pagination-link ${i === page ? "active" : ""}`}>
+          <Link
+            to={`/${path}/${i}`}
+            className={`pagination-link ${i === page ? "pagination-active" : ""}`}
+          >
             {i}
           </Link>
         </li>
@@ -35,7 +38,7 @@ const Pagination = ({ page, perPage, count, path }) => {
       return (
         <li>
           <Link to={`/${path}/${page + 1}`} className="pagination-link">
-            <BsChevronDoubleRight size={20}/>
+            <BsChevronDoubleRight size={20} />
           </Link>
         </li>
       );
@@ -54,12 +57,14 @@ const Pagination = ({ page, perPage, count, path }) => {
     }
   };
 
-  return count > perPage && (
-    <ul className="flex items-center">
-      {prev()}
-      {links()}
-      {next()}
-    </ul>
+  return (
+    count > perPage && (
+      <ul className="flex items-center">
+        {prev()}
+        {links()}
+        {next()}
+      </ul>
+    )
   );
 };
 

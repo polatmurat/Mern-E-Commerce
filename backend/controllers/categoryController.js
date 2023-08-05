@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const connect = require('../config/db');
 const Category = require('../models/Category');
+const { ObjectId } = require('mongodb'); // ObjectID kullanımı için düzeltme
 
 
 const createCategory = async (req, res) => {
@@ -51,4 +52,32 @@ const categories = async (req, res) => {
   }
 };
 
-module.exports = { createCategory, categories };
+const fetchCategory = async (req, res) => {
+  const { id } = req.params;
+
+  // id değeri boş ise hata döndür
+  if (!id) {
+    return res.status(400).json({ error: 'Category ID is missing in the request.' });
+  }
+
+  try {
+    const client = await connect();
+    const categoryCollection = client.db('ecommerce').collection('category');
+
+    // Dönüştürülmüş ObjectId ile veriyi arayın
+    const response = await categoryCollection.findOne({ _id: id });
+
+    if (!response) {
+      return res.status(404).json({ error: 'Category not found.' });
+    }
+
+    console.log('controller response : ', response);
+
+    return res.status(200).json({ category: response });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ error: 'Server internal error!' });
+  }
+};
+
+module.exports = { createCategory, fetchCategory, categories };
