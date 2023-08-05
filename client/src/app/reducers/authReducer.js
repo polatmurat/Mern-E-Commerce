@@ -13,7 +13,7 @@ const verifyToken = () => {
         return adminStorage; // Return the token if it's valid
       }
     } else {
-      return null; // Return null if there is no token
+      return null;
     }
   }
   

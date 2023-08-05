@@ -2,8 +2,8 @@ import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 const Pagination = ({ page, perPage, count, path }) => {
   const totalLinks = Math.ceil(count / perPage);
-  let startLoop = page - 2; // Show 2 pages before the current page
-  let endLoop = page + 2; // Show 2 pages after the current page
+  let startLoop = page - 2;
+  let endLoop = page + 2;
 
   // Adjust startLoop and endLoop when they go beyond the valid page range
   if (startLoop < 1) {

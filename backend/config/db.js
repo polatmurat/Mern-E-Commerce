@@ -12,12 +12,10 @@ async function run() {
     try {
         await client.connect();
         await client.db("ecommerce").command({ ping: 1 });
-
-        // Bağlanılan veritabanının adını döndür
         return client;
     } catch (error) {
         console.log(error.message);
-        throw error; // Çağrıcı hata ile başa çıksın diye hatayı yeniden fırlat
+        throw error; // again, because we should make this unconducted!
     }
 }
 
