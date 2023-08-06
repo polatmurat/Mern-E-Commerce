@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setSuccess } from "../../app/reducers/globalReducer";
 import { useFetchCategoryQuery } from "../../features/category/categoryService";
-
+import Spinner from '../../components/Spinner';
 
 const UpdateCategory = () => {
   const dispatch = useDispatch();
@@ -16,18 +16,18 @@ const UpdateCategory = () => {
   const {id} = useParams();
   const {data, isFetching} = useFetchCategoryQuery(id);
   console.log('category data : *** ', data);
-//   const errors = data?.error?.data?.errors ? data?.error?.data?.errors : [];
-//   const submitCategory = (event) => {
-//     event.preventDefault();
-//     saveCategory({ name: state });
-//   };
 
-//   useEffect(() => {
-//     if (data?.isSuccess) {
-//       dispatch(setSuccess(data?.data?.msg));
-//       navigate("/dashboard/categories");
-//     }
-//   }, [data?.isSuccess]);
+  useEffect(() => {
+    data?.category && setState(data?.category?.name);
+
+  }, data?.category)
+
+//   const errors = data?.error?.data?.errors ? data?.error?.data?.errors : [];
+  const updateSubmit = (event) => {
+    event.preventDefault();
+    saveCategory({ name: state, id: id });
+  };
+
 
   return (
     <Wrapper>
@@ -40,7 +40,7 @@ const UpdateCategory = () => {
           Category List
         </Link>
       </ScreenHeader>
-      <form className="w-full md:w-8/12">
+      {!isFetching ?       <form className="w-full md:w-8/12" onSubmit={updateSubmit}>
         <h3 className="text-lg capitalize mb-3">Update Category</h3>
         {/* {errors.length > 0 &&
           errors.map((error, key) => (
@@ -65,7 +65,7 @@ const UpdateCategory = () => {
             className="btn-indigo"
           />
         </div>
-      </form>
+      </form> : <Spinner />}
     </Wrapper>
   );
 };

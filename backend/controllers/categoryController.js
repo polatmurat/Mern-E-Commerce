@@ -1,7 +1,7 @@
 const { validationResult } = require("express-validator");
 const connect = require('../config/db');
 const Category = require('../models/Category');
-const { ObjectId } = require('mongodb'); 
+const { ObjectId } = require('mongodb');
 
 const createCategory = async (req, res) => {
   const errors = validationResult(req);
@@ -51,8 +51,6 @@ const categories = async (req, res) => {
   }
 };
 
-
-
 const fetchCategory = async (req, res) => {
   const { id } = req.params;
 
@@ -62,12 +60,12 @@ const fetchCategory = async (req, res) => {
 
   try {
     console.log('Requested ID:', id);
-    console.log('Converted ObjectId:', ObjectId(id));
-
+    const objID = new ObjectId(id);
+    console.log('Converted ObjectId:', objID);
     const client = await connect();
     const categoryCollection = client.db('ecommerce').collection('category');
 
-    const response = await categoryCollection.findOne({ _id: ObjectId(id) });
+    const response = await categoryCollection.findOne({ _id: objID });
 
     if (!response) {
       return res.status(404).json({ error: 'Category not found.' });
@@ -79,6 +77,37 @@ const fetchCategory = async (req, res) => {
   } catch (error) {
     console.log(error.message);
     return res.status(500).json({ error: 'Server internal error!' });
+  }
+};
+
+const updateCategory = async (req, res) => {
+  const { id } = req.params;
+  const objID = ObjectId(id);
+  const { name } = req.body;
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    try {
+
+      const client = await connect();
+      const categoryCollection = client.db('ecommerce').collection('category');
+
+      const categoryExist = await categoryCollection.findOne({ name });
+
+      if (!categoryExist) {
+
+        await categoryCollection.updateOne({_id: objID, {$set: {name}});
+
+        return res.status(201).json({ msg: 'The category has been updated successfully.' });
+      } else {
+        return res.status(401).json({ errors: [{ msg: `${name} is already exists!` }] });
+      }
+    } catch (error) {
+      console.log(error.message);
+      return res.status(500).json("Server internal error!");
+    }
+  } else {
+    return res.status(401).json({ errors: errors.array() });
+  }
   }
 };
 
