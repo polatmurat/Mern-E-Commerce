@@ -6,5 +6,6 @@ const Authorization = require('../services/Authorization');
 
 router.post("/create-category", [categoryValidations, Authorization.authorized], createCategory);
 router.get('/categories/:page', Authorization.authorized, categories);
-router.get('/fetch-category/:id', Authorization.authorized, fetchCategory)
+router.get('/fetch-category/:id', Authorization.authorized, fetchCategory);
+router.put('/update-category/:id', [categoryValidations, Authorization.authorized], updateCategory);
 module.exports = router;
