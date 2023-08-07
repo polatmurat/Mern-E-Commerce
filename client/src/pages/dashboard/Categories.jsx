@@ -54,13 +54,13 @@ const Categories = () => {
                 <thead>
                   <tr className="border-b border-gray-800 text-left">
                     <th className="p-3 uppercase text-base font-sm text-gray-500">
-                      name
+                      Name
                     </th>
                     <th className="p-3 uppercase text-base font-sm text-gray-500">
-                      edit
+                      Edit
                     </th>
                     <th className="p-3 uppercase text-base font-sm text-gray-500">
-                      delete
+                      Delete
                     </th>
                   </tr>
                 </thead>
@@ -92,3 +92,5 @@ const Categories = () => {
 };
 
 export default Categories;
+
+

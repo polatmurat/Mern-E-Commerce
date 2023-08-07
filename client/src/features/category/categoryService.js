@@ -30,7 +30,8 @@ const categoryService = createApi({
           method: 'PUT',
           body: {name : data.name}
         }
-      }
+      },
+      invalidatesTags: ['categories']
     }),
     get: builder.query({
       query: (page) => {
@@ -49,6 +50,7 @@ const categoryService = createApi({
           method: 'GET',
         };
       },
+      providesTags: ['categories']
     }),
   }), // Close parenthese for endpoints object
 });

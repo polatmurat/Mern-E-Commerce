@@ -82,21 +82,18 @@ const fetchCategory = async (req, res) => {
 
 const updateCategory = async (req, res) => {
   const { id } = req.params;
-  const objID = ObjectId(id);
+  const objID = new ObjectId(id);
   const { name } = req.body;
   const errors = validationResult(req);
   if (errors.isEmpty()) {
     try {
-
       const client = await connect();
       const categoryCollection = client.db('ecommerce').collection('category');
 
       const categoryExist = await categoryCollection.findOne({ name });
 
       if (!categoryExist) {
-
-        await categoryCollection.updateOne({_id: objID, {$set: {name}});
-
+        await categoryCollection.updateOne({ _id: objID }, { $set: { name } });
         return res.status(201).json({ msg: 'The category has been updated successfully.' });
       } else {
         return res.status(401).json({ errors: [{ msg: `${name} is already exists!` }] });
@@ -108,7 +105,7 @@ const updateCategory = async (req, res) => {
   } else {
     return res.status(401).json({ errors: errors.array() });
   }
-  }
 };
 
-module.exports = { createCategory, fetchCategory, categories };
+
+module.exports = { createCategory, fetchCategory, updateCategory, categories };
