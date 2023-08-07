@@ -62,10 +62,10 @@ const login = async (req, res) => {
                         return res.status(201).json({ token, admin: false });
                     }
                 } else {
-                    return res.status(401).json({ errors: [{ 'msg': 'Password not matched. Login Failure!' }] })
+                    return res.status(400   ).json({ errors: [{ 'msg': 'Password not matched. Login Failure!' }] })
                 }
             } else {
-                return res.status(401).json({ errors: [{ 'msg': `${email} is not found!` }] });
+                return res.status(400).json({ errors: [{ 'msg': `${email} is not found!` }] });
             }
 
         } catch (error) {
@@ -74,7 +74,7 @@ const login = async (req, res) => {
         }
     } else {
         // Validations failed
-        return res.status(401).json({ errors: errors.array() });
+        return res.status(400).json({ errors: errors.array() });
     }
 };
 

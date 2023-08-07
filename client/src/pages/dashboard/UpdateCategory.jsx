@@ -15,12 +15,10 @@ const UpdateCategory = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { success } = useSelector((state) => state.globalReducer);
-  console.log("SUCCESS : ", success);
 
   const [state, setState] = useState("");
   const { id } = useParams();
   const { data, isFetching } = useFetchCategoryQuery(id);
-  console.log("category data : *** ", data);
 
   useEffect(() => {
     if (data?.category) {
@@ -38,9 +36,10 @@ const UpdateCategory = () => {
     saveCategory({ name: state, id: id });
   };
 
+
   useEffect(() => {
     if (response?.isSuccess) {
-      dispatch(setSuccess(response?.data?.message));
+      dispatch(setSuccess(response?.data?.msg));
       navigate("/dashboard/categories");
     }
   }, [response?.isSuccess]);

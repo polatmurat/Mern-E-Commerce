@@ -15,8 +15,6 @@ const CreateCategory = () => {
   const [saveCategory, data] = useCreateMutation();
   const errors = data?.error?.data?.errors ? data?.error?.data?.errors : [];
 
-  console.log(data);
-
   const submitCategory = (event) => {
     event.preventDefault();
     saveCategory({ name: state });

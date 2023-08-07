@@ -21,14 +21,14 @@ const createCategory = async (req, res) => {
 
         return res.status(201).json({ msg: 'The category has been created successfully.' });
       } else {
-        return res.status(401).json({ errors: [{ msg: `${name} is already exists!` }] });
+        return res.status(400).json({ errors: [{ msg: `${name} is already exists!` }] });
       }
     } catch (error) {
       console.log(error.message);
       return res.status(500).json("Server internal error!");
     }
   } else {
-    return res.status(401).json({ errors: errors.array() });
+    return res.status(400).json({ errors: errors.array() });
   }
 };
 
@@ -96,14 +96,14 @@ const updateCategory = async (req, res) => {
         await categoryCollection.updateOne({ _id: objID }, { $set: { name } });
         return res.status(201).json({ msg: 'The category has been updated successfully.' });
       } else {
-        return res.status(401).json({ errors: [{ msg: `${name} is already exists!` }] });
+        return res.status(400).json({ errors: [{ msg: `${name} is already exists!` }] });
       }
     } catch (error) {
       console.log(error.message);
       return res.status(500).json("Server internal error!");
     }
   } else {
-    return res.status(401).json({ errors: errors.array() });
+    return res.status(400).json({ errors: errors.array() });
   }
 };
 
