@@ -107,5 +107,45 @@ const updateCategory = async (req, res) => {
   }
 };
 
+const deleteCategory = async (req, res) => {
+  const { id } = req.params;
+  const objID = new ObjectId(id);
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    try {
+      const client = await connect();
+      const categoryCollection = client.db('ecommerce').collection('category');
 
-module.exports = { createCategory, fetchCategory, updateCategory, categories };
+      const categoryExist = await categoryCollection.findOne({ _id: objID });
+
+      if (categoryExist) {
+        await categoryCollection.deleteOne({ _id: objID });
+        return res.status(201).json({ msg: 'The category has been deleted successfully.' });
+      } else {
+        return res.status(400).json({ errors: [{ msg: `${objID} doesn't exists!` }] });
+      }
+    } catch (error) {
+      console.log(error.message);
+      return res.status(500).json("Server internal error!");
+    }
+  } else {
+    return res.status(400).json({ errors: errors.array() });
+  }
+};
+
+const getAllCategories = async (req, res) => {
+  try {
+    const client = await connect();
+    const categoryCollection = client.db('ecommerce').collection('category');
+    const categoriesCursor = categoryCollection.find({}); // Get the cursor
+    const categories = await categoriesCursor.toArray(); // Convert the cursor to an array, await is important :)
+    console.log("All Categories ", categories);
+    return res.status(200).json({categories});
+
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json("Server internal error!");
+  }
+};
+
+module.exports = { createCategory, fetchCategory, updateCategory, deleteCategory, categories, getAllCategories };

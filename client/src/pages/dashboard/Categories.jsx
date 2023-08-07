@@ -4,8 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import ScreenHeader from "../../components/ScreenHeader";
 import Wrapper from "./Wrapper";
 import { BsPlusLg } from "react-icons/bs";
-import { clearMessage } from "../../app/reducers/globalReducer";
-import { useGetQuery } from "../../features/category/categoryService";
+import { clearMessage, setSuccess } from "../../app/reducers/globalReducer";
+import {
+  useGetQuery,
+  useDeleteCategoryMutation,
+} from "../../features/category/categoryService";
 import Spinner from "../../components/Spinner";
 import Pagination from "../../components/Pagination";
 
@@ -21,6 +24,22 @@ const Categories = () => {
   }
 
   const dispatch = useDispatch();
+
+  const [removeCategory, response] = useDeleteCategoryMutation();
+  console.log(response, " RESPONSE REMOVE");
+  const delCategory = (id) => {
+    if (window.confirm("This category will be deleted, are you sure?")) {
+      removeCategory(id);
+    }
+  };
+
+  console.log(response.data);
+
+  useEffect(() => {
+    if (response.isSuccess) {
+      dispatch(setSuccess(response?.data?.msg));
+    }
+  }, [response?.data?.msg]);
 
   useEffect(() => {
     if (success) {
@@ -69,17 +88,32 @@ const Categories = () => {
                         {category.name}
                       </td>
                       <td className="p-3 capitalize text-sm font-normal text-gray-400">
-                        <Link to={`/dashboard/update-category/${category._id}`} className="bg-palette4 w-1/4 px-5 py-2 cursor-pointer text-white rounded-md">Edit</Link>
+                        <Link
+                          to={`/dashboard/update-category/${category._id}`}
+                          className="bg-palette4 w-1/4 px-5 py-2 cursor-pointer text-white rounded-md"
+                        >
+                          Edit
+                        </Link>
                       </td>
                       <td className="p-3 capitalize text-sm font-normal text-gray-400">
-                        <a className="bg-red-500 w-1/4 px-4 py-2 cursor-pointer text-white rounded-md">Delete</a>
+                        <a
+                          className="bg-red-500 w-1/4 px-4 py-2 cursor-pointer text-white rounded-md"
+                          onClick={() => delCategory(category._id)}
+                        >
+                          Delete
+                        </a>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <Pagination page={parseInt(page)} perPage={data.perPage} count={data.count} path="dashboard/categories" />
+            <Pagination
+              page={parseInt(page)}
+              perPage={data.perPage}
+              count={data.count}
+              path="dashboard/categories"
+            />
           </>
         )
       ) : (
@@ -90,5 +124,3 @@ const Categories = () => {
 };
 
 export default Categories;
-
-

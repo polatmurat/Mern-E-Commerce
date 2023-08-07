@@ -7,7 +7,7 @@
         @apply bg-palette1 px-4 py-3 capitalize font-medium;
     }
     .form-control {
-        @apply w-full bg-palette2 p-3 rounded outline-none text-white;
+        @apply w-full bg-palette2 p-3 rounded outline-none text-white focus:ring-[3px] ring-palette4 transition-all duration-300 placeholder:capitalize;
 
     }
     .btn-indigo {
@@ -26,4 +26,7 @@
     .pagination-active {
         @apply bg-gray-400 text-gray-900;
     }
+
+
+
 }

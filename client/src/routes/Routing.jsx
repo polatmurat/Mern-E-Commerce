@@ -6,6 +6,7 @@ import Public from "./Public";
 import Categories from "../pages/dashboard/Categories";
 import CreateCategory from "../pages/dashboard/CreateCategory";
 import UpdateCategory from "../pages/dashboard/UpdateCategory";
+import CreateProduct from "../pages/dashboard/CreateProduct";
 
 const Routing = () => {
   return (
@@ -60,6 +61,14 @@ const Routing = () => {
             element={
               <Private>
                 <UpdateCategory />
+              </Private>
+            }
+          />
+          <Route
+            path="create-product"
+            element={
+              <Private>
+                <CreateProduct />
               </Private>
             }
           />

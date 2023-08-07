@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const Sidebar = ({ side, closeSidebar }) => {
   return (
     <div
-      className={`fixed z-10 top-0 ${side} sm:left-0  w-64 h-screen bg-palette1`}
+      className={`fixed z-10 top-0 ${side} sm:left-0  w-64 h-screen bg-palette1 transition-all ease-in-out duration-200`}
     >
       <div>
         <img src="/logo.png" alt="Logo" />

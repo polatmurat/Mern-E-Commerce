@@ -14,13 +14,15 @@ const categoryService = createApi({
   }),
   endpoints: (builder) => ({
     create: builder.mutation({
-      query: (name) => {
+      query: (data) => {
         return {
           url: 'create-category',
           method: 'POST',
-          body: { name }, // Wrap the name inside an object as a JSON body
+          body: { name: data.name },
         };
       },
+      
+      
       invalidatesTags: ['categories'],
     }),
     updateCategory: builder.mutation({
@@ -42,7 +44,15 @@ const categoryService = createApi({
       },
       providesTags: ['categories'],
     }),
-
+    deleteCategory: builder.mutation({
+      query: (data) => {
+        return {
+          url: `delete-category/${data}`,
+          method: 'DELETE',
+        }
+      },
+      invalidatesTags: ['categories']
+    }),
     fetchCategory: builder.query({
       query: (id) => {
         return {
@@ -52,8 +62,16 @@ const categoryService = createApi({
       },
       providesTags: ['categories']
     }),
+    allCategories: builder.query({
+      query: () => {
+        return {
+          url: 'all-categories',
+          method: 'GET'
+        }
+      }
+    })
   }), // Close parenthese for endpoints object
 });
 
-export const { useCreateMutation, useGetQuery, useFetchCategoryQuery, useUpdateCategoryMutation } = categoryService;
+export const { useCreateMutation, useGetQuery, useFetchCategoryQuery, useUpdateCategoryMutation, useDeleteCategoryMutation, useAllCategoriesQuery } = categoryService;
 export default categoryService;

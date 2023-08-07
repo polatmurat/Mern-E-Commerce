@@ -76,7 +76,7 @@ const UpdateCategory = () => {
             />
           </div>
           <div className="mb-3 flex justify-center">
-            <input type="submit" value="Update" className="btn-indigo" />
+            <input type="submit" value={response.isLoading ? 'Loading...' : 'Update'} className="btn-indigo" />
           </div>
         </form>
       ) : (
