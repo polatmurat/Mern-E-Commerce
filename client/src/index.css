@@ -2,31 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+.ql-toolbar.ql-snow {
+  background-color: rgb(17 24 39) !important;
+}
+.ql-container.ql-snow {
+  background-color: rgb(55 65 81) !important;
+}
+
 @layer components {
-    .btn-dark {
-        @apply bg-palette1 px-4 py-3 capitalize font-medium;
-    }
-    .form-control {
-        @apply w-full bg-palette2 p-3 rounded outline-none text-white focus:ring-[3px] ring-palette4 transition-all duration-300 placeholder:capitalize;
-
-    }
-    .btn-indigo {
-        @apply bg-indigo-600 w-1/4 p-3 cursor-pointer text-white rounded-lg;
-
-    }
-    .alert-danger {
-        @apply bg-red-100 text-red-700 px-3 py-4 mb-2 border-l-8 border-red-700 rounded-sm text-sm font-medium;
-    }
-    .alert-success {
-        @apply bg-green-200 text-slate-800 px-3 py-4 mb-5 border-l-8 border-green-800 rounded-sm text-sm font-medium;
-    }
-    .pagination-link {
-        @apply border border-gray-900 text-gray-500 text-sm font-medium block py-2 px-4 bg-gray-900;
-    }
-    .pagination-active {
-        @apply bg-gray-400 text-gray-900;
-    }
-
-
-
+  .btn-dark {
+    @apply bg-palette1 px-4 py-3 capitalize font-medium cursor-pointer;
+  }
+  .form-control {
+    @apply w-full bg-palette2 p-3 rounded outline-none text-gray-400 focus:ring-[3px] ring-palette4 transition-all duration-300 placeholder:capitalize;
+  }
+  .btn-indigo {
+    @apply bg-indigo-600 w-1/4 p-3 cursor-pointer text-white rounded-lg;
+  }
+  .alert-danger {
+    @apply bg-red-100 text-red-700 px-3 py-4 mb-2 border-l-8 border-red-700 rounded-sm text-sm font-medium;
+  }
+  .alert-success {
+    @apply bg-green-200 text-slate-800 px-3 py-4 mb-5 border-l-8 border-green-800 rounded-sm text-sm font-medium;
+  }
+  .pagination-link {
+    @apply border border-gray-900 text-gray-500 text-sm font-medium block py-2 px-4 bg-gray-900;
+  }
+  .pagination-active {
+    @apply bg-gray-400 text-gray-900;
+  }
+  .size {
+    @apply border border-gray-400 text-gray-400 ml-2 px-3 py-1.5 mt-2 uppercase cursor-pointer rounded text-sm;
+  }
+  .right-heading {
+    @apply mb-2 capitalize text-gray-400 text-base;
+  }
+  .input-file {
+    @apply block file:cursor-pointer file:py-2 file:px-4 file:rounded file:bg-palette1 file:text-white mt-2 file:text-sm file:font-medium file:mr-3;
+  }
 }

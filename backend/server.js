@@ -5,6 +5,7 @@ const cors = require('cors');
 const connect = require('./config/db');
 const userRoute = require('./routes/userRoute');
 const categoryRoute = require('./routes/categoryRoute');
+const productRoute = require('./routes/productRoute');
 const app = express();
 
 const PORT = process.env.PORT;
@@ -30,7 +31,7 @@ app.get("/products", async (req, resp) => {
 // User route setup
 app.use('/api',userRoute);
 app.use('/api',categoryRoute);
-
+app.use('/api', productRoute);
 app.listen(PORT, () => console.log(`Server is running at ${PORT} port!`.magenta.italic));
 
 

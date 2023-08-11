@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "concurrently": "^8.2.0",
-    "express-validator": "^7.0.1"
+    "express-validator": "^7.0.1",
+    "react-quill": "^2.0.0"
   }
 }
