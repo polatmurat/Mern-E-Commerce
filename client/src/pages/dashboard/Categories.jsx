@@ -67,7 +67,7 @@ const Categories = () => {
         data?.categories?.length > 0 && (
           <>
             <div className="mb-4">
-              <table className="w-full bg-palette1 rounded-md ">
+              <table className="w-full bg-palette1 rounded-md">
                 <thead>
                   <tr className="border-b border-gray-800 text-left">
                     <th className="p-3 uppercase text-base font-sm text-gray-500">

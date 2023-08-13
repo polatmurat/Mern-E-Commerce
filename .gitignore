@@ -1,6 +1,7 @@
 node_modules
 backend/.env
 .env
+client/public/images
 
 # git rm -r --cached directory_name/
 # git rm --cached filename.js
