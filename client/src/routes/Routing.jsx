@@ -7,6 +7,7 @@ import Categories from "../pages/dashboard/Categories";
 import CreateCategory from "../pages/dashboard/CreateCategory";
 import UpdateCategory from "../pages/dashboard/UpdateCategory";
 import CreateProduct from "../pages/dashboard/CreateProduct";
+import UpdateProduct from "../pages/dashboard/UpdateProduct";
 
 const Routing = () => {
   return (
@@ -37,6 +38,14 @@ const Routing = () => {
             element={
               <Private>
                 <Products />
+              </Private>
+            }
+          />
+          <Route
+            path="update-product/:id"
+            element={
+              <Private>
+                <UpdateProduct />
               </Private>
             }
           />

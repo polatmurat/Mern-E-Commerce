@@ -9,13 +9,13 @@ const AdminNavigation = ({ openSidebar }) => {
   };
   return (
     <nav className="fixed left-0 sm:left-64 top-4 right-0">
-      <div className="bg-palette3 w-full flex justify-between items-center p-4">
+      <div className="bg-palette3 w-full flex items-center p-4">
         <BsFilterLeft
           className="text-white text-3xl cursor-pointer sm:hidden block"
           onClick={openSidebar}
         />
         <button
-          className="py-2 px-4 bg-indigo-600 text-white rounded-md capitalize"
+          className="py-2 px-4 ml-auto bg-indigo-600 text-white rounded-md capitalize"
           onClick={adminLogout}
         >
           Logout

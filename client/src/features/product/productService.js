@@ -1,11 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-
-
-
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const productService = createApi({
     reducerPath: 'products',
-    tagTypes:'products',
+    tagTypes: ['products'],
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:8080/api/',
         prepareHeaders: (headers, { getState }) => {
@@ -16,30 +13,46 @@ const productService = createApi({
             return headers;
         }
     }),
-    endpoints: (builder) => {
-        return {
-            createProduct: builder.mutation({
-                query: (data) => {
-                    return {
-                        url: 'create-product',
-                        method: 'POST',
-                        body: data
-                    }
-                },
-                invalidatesTags: ['products']
+    endpoints: (builder) => ({
+        createProduct: builder.mutation({
+            query: (data) => ({
+                url: 'create-product',
+                method: 'POST',
+                body: data
             }),
-            getProducts: builder.query({
-                query: (page) => {
-                    return {
-                        url: `products/${page}`,
-                        method: 'GET'
-                    }
-                },
-                providesTags: ['products']
-            })
-        }
-    }
-})
+            invalidatesTags: ['products']
+        }),
+        updateProduct: builder.mutation({
+            query: data => {
+                return {
+                    url: 'product',
+                    method: 'PUT',
+                    body: data
+                }
+            },
+            invalidatesTags: ['products']
+        }),
+        getProducts: builder.query({
+            query: (page) => ({
+                url: `products/${page}`,
+                method: 'GET'
+            }),
+            providesTags: ['products']
+        }),
+        fetchProduct: builder.query({
+            query: (id) => ({
+                url: `product/${id}`,
+                method: 'GET'
+            }),
+            providesTags: ['products']
+        }),
+    }),
+});
 
-export const { useCreateProductMutation, useGetProductsQuery } = productService;
+export const {
+    useCreateProductMutation,
+    useGetProductsQuery,
+    useFetchProductQuery,
+    useUpdateProductMutation
+} = productService;
 export default productService;
