@@ -3,8 +3,8 @@ class Product {
         this.title = title;
         this.price = price;
         this.discount = discount;
-        this.stock = stock;
         this.category = category;
+        this.stock = stock;
         this.colors = colors;
         this.sizes = sizes;
         this.description = description;
