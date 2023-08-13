@@ -5,7 +5,10 @@ import { BsBox } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { clearMessage } from "../../app/reducers/globalReducer";
 import toast, { Toaster } from "react-hot-toast";
-import { useGetProductsQuery } from "../../features/product/productService";
+import {
+  useGetProductsQuery,
+  useDeleteProductMutation,
+} from "../../features/product/productService";
 import ScreenHeader from "../../components/ScreenHeader";
 import Spinner from "../../components/Spinner";
 import Pagination from "../../components/Pagination";
@@ -32,7 +35,13 @@ const Products = () => {
     };
   }, []);
 
-  const delProd = (prodID) => {};
+  const [deleteProduct, response] = useDeleteProductMutation();
+  
+  const delProd = (prodID) => {
+    if (window.confirm("Are you sure to delete that product?")) {
+      deleteProduct(prodID);
+    }
+  };
 
   console.log(data);
 
@@ -82,7 +91,7 @@ const Products = () => {
                         {product.title}
                       </td>
                       <td className="p-3 capitalize text-sm font-normal text-gray-400">
-                        {'$' + product.price + ".00"}
+                        {"$" + product.price + ".00"}
                       </td>
                       <td className="p-3 capitalize text-sm font-normal text-gray-400">
                         {product.stock}

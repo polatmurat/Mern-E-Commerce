@@ -7,4 +7,5 @@ router.post('/create-product', [Authorization.authorized], productController.cre
 router.get('/products/:page', [Authorization.authorized], productController.get);
 router.get('/product/:id', [Authorization.authorized], productController.fetch);
 router.put('/product', [Authorization.authorized, productValidations], productController.updateProduct);
+router.delete('/delete-product/:id', [Authorization.authorized], productController.deleteProduct);
 module.exports = router;

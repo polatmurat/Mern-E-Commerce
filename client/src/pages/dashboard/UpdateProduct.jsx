@@ -6,6 +6,7 @@ import { TwitterPicker } from "react-color";
 import { v4 as uuidv4 } from "uuid";
 import Spinner from "../../components/Spinner";
 import toast, { Toaster } from "react-hot-toast";
+import parser from 'html-react-parser';
 import ScreenHeader from "../../components/ScreenHeader";
 import { useAllCategoriesQuery } from "../../features/category/categoryService";
 import {
@@ -113,15 +114,16 @@ const UpdateProduct = () => {
   console.log(product);
 
   useEffect(() => {
+    setState({...state, description: value});
+  }, [value]);
+
+  useEffect(() => {
     if (!fetching) {
-      // Sadece product değeri mevcutsa işlemleri yap
       setState(product.product);
       setSizeList(product.product.sizes);
-      setValue(product.product.description);
+      setValue(parser(product.product.description));
     }
   }, [product]);
-
-  console.log("your state : ", state);
 
   return (
     <Wrapper>
