@@ -4,4 +4,5 @@ const Authorization = require('../services/Authorization');
 const { productValidations } = require('../validations/productValidation');
 const productController = require('../controllers/productController');
 router.post('/create-product', [Authorization.authorized], productController.create);
+router.get('/products/:page', [Authorization.authorized], productController.get);
 module.exports = router;

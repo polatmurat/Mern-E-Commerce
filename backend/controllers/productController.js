@@ -106,6 +106,26 @@ class ProductController {
             }
         });
     }
+
+    async get (req,res) {
+        const {page} = req.params;
+        const perPage = 5;
+        const skip = (page - 1) * perPage;
+        try {
+
+            const client = await connect();
+            const productCollection = client.db('ecommerce').collection('product');
+        
+            const count = await productCollection.countDocuments();
+            const cursor = productCollection.find({}).skip(skip).limit(perPage).sort({ updatedAt: -1 }); // Cursor handling.
+            const response = await cursor.toArray();
+            console.log(response);
+            return res.status(200).json({ perPage, count, products: response });
+        
+          } catch (error) {
+            console.log(error.message);
+          }
+    }
 }
 
 module.exports = new ProductController;

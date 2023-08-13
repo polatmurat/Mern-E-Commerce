@@ -7,7 +7,7 @@ const productService = createApi({
     reducerPath: 'products',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:8080/api/',
-        prepareHeaders: (headers, {getState}) => {
+        prepareHeaders: (headers, { getState }) => {
             const reducers = getState();
             const token = reducers?.authReducer?.adminToken;
             console.log(token);
@@ -25,10 +25,18 @@ const productService = createApi({
                         body: data
                     }
                 }
+            }),
+            getProducts: builder.query({
+                query: (page) => {
+                    return {
+                        url: `products/${page}`,
+                        method: 'GET'
+                    }
+                }
             })
         }
     }
 })
 
-export const {useCreateProductMutation} = productService;
+export const { useCreateProductMutation, useGetProductsQuery } = productService;
 export default productService;
