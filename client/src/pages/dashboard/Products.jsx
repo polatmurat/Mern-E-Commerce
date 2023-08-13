@@ -6,12 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearMessage } from "../../app/reducers/globalReducer";
 import toast, { Toaster } from "react-hot-toast";
 import { useGetProductsQuery } from "../../features/product/productService";
-
+import ScreenHeader from "../../components/ScreenHeader";
 
 const Products = () => {
-
-  let {page} = useParams();
-  if(!page) {
+  let { page } = useParams();
+  if (!page) {
     page = 1;
   }
 
@@ -28,19 +27,21 @@ const Products = () => {
 
     return () => {
       dispatch(clearMessage());
-    }
+    };
   }, []);
 
   return (
     <Wrapper>
-      <Link
-        to="/dashboard/create-product"
-        className="btn-dark inline-flex items-center"
-      >
-        <BsBox className="mr-2" />
-        Create Product
-      </Link>
-      <Toaster position="top-right" />
+      <ScreenHeader>
+        <Link
+          to="/dashboard/create-product"
+          className="btn-dark inline-flex items-center"
+        >
+          <BsBox className="mr-2" />
+          Create Product
+        </Link>
+        <Toaster position="top-right" />
+      </ScreenHeader>
     </Wrapper>
   );
 };

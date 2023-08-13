@@ -5,6 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 const productService = createApi({
     reducerPath: 'products',
+    tagTypes:'products',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:8080/api/',
         prepareHeaders: (headers, { getState }) => {
@@ -24,7 +25,8 @@ const productService = createApi({
                         method: 'POST',
                         body: data
                     }
-                }
+                },
+                invalidatesTags: ['products']
             }),
             getProducts: builder.query({
                 query: (page) => {
@@ -32,7 +34,8 @@ const productService = createApi({
                         url: `products/${page}`,
                         method: 'GET'
                     }
-                }
+                },
+                providesTags: ['products']
             })
         }
     }
