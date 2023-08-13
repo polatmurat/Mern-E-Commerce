@@ -139,7 +139,6 @@ const getAllCategories = async (req, res) => {
     const categoryCollection = client.db('ecommerce').collection('category');
     const categoriesCursor = categoryCollection.find({}); // Get the cursor
     const categories = await categoriesCursor.toArray(); // Convert the cursor to an array, await is important :)
-    console.log("All Categories ", categories);
     return res.status(200).json({categories});
 
   } catch (error) {

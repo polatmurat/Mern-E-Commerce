@@ -1,5 +1,4 @@
 const Colors = ({ colors, deleteColors }) => {
-  console.log(colors, " COLORS");
   return (
     <div>
       {colors.length > 0 && <h1 className="right-heading">Colors List</h1>}

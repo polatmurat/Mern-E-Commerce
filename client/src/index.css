@@ -40,4 +40,7 @@
   .input-file {
     @apply block file:cursor-pointer file:py-2 file:px-4 file:rounded file:bg-palette1 file:text-white mt-2 file:text-sm file:font-medium file:mr-3;
   }
+  .input-label {
+    @apply text-gray-400 mb-2 block;
+  }
 }

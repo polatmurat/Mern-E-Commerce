@@ -1,24 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Wrapper from "./Wrapper";
 import { BsArrowLeft } from "react-icons/bs";
 import { TwitterPicker } from "react-color";
 import { v4 as uuidv4 } from "uuid";
 import Spinner from "../../components/Spinner";
+import toast, { Toaster } from 'react-hot-toast';
 import ScreenHeader from "../../components/ScreenHeader";
 import { useAllCategoriesQuery } from "../../features/category/categoryService";
 import { useCreateProductMutation } from "../../features/product/productService";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Colors from "../../components/Colors";
 import SizeList from "./SizeList";
 import ImagePreview from "../../components/ImagePreview";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { setSuccess } from "../../app/reducers/globalReducer";
 
 const CreateProduct = () => {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { data = [], isFetching } = useAllCategoriesQuery();
 
   const [value, setValue] = useState("");
-  console.log("rich text editor : ", value);
 
   const [state, setState] = useState({
     title: "",
@@ -85,14 +91,12 @@ const CreateProduct = () => {
     }
   };
 
-  console.log(preview);
+  // console.log(preview);
 
   const chooseSize = (sizeObject) => {
     const filtered = sizeList.filter((size) => size.name !== sizeObject.name);
     setSizeList([...filtered, sizeObject]);
   };
-
-  console.log(sizeList, " SIZELIST");
 
   const [createNewProduct, response] = useCreateProductMutation();
   console.log("Y Resonse : ", response);
@@ -106,8 +110,26 @@ const CreateProduct = () => {
     formData.append("image1", state.image1);
     formData.append("image2", state.image2);
     formData.append("image3", state.image3);
+
+    formData.append("sizes", JSON.stringify(sizeList));
+
     createNewProduct(formData);
   };
+
+  useEffect(() => {
+    if(!response.isSuccess) {
+      response?.error?.data?.errors.map(err => {
+        toast.error(err.msg);
+      })
+    }
+  }, [response?.error?.data?.errors]);
+
+  useEffect(() => {
+    if (response?.isSuccess) {
+      dispatch(setSuccess(response?.data?.msg));
+      navigate("/dashboard/products");
+    }
+  }, [response?.isSuccess]);
 
   return (
     <Wrapper>
@@ -120,10 +142,14 @@ const CreateProduct = () => {
           Products List
         </Link>
       </ScreenHeader>
+      <Toaster position="top-right" reverseOrder />
       <div className="flex flex-wrap -mx-3">
         <form className="w-full xl:w-8/12 p-3" onSubmit={createProd}>
           <div className="flex flex-wrap">
             <div className="w-full md:w-6/12 p-3">
+            <label htmlFor="colors" className="input-label">
+                Title
+              </label>
               <input
                 type="text"
                 name="title"
@@ -135,6 +161,9 @@ const CreateProduct = () => {
               />
             </div>
             <div className="w-full md:w-6/12 p-3">
+            <label htmlFor="colors" className="input-label">
+                Price
+              </label>
               <input
                 type="number"
                 name="price"
@@ -146,6 +175,9 @@ const CreateProduct = () => {
               />
             </div>
             <div className="w-full md:w-6/12 p-3">
+            <label htmlFor="colors" className="input-label">
+                Discount
+              </label>
               <input
                 type="number"
                 name="discount"
@@ -157,6 +189,9 @@ const CreateProduct = () => {
               />
             </div>
             <div className="w-full md:w-6/12 p-3">
+            <label htmlFor="colors" className="input-label">
+                Stock
+              </label>
               <input
                 type="number"
                 name="stock"
@@ -194,7 +229,7 @@ const CreateProduct = () => {
               )}
             </div>
             <div className="w-full md:w-6/12 p-3">
-              <label htmlFor="colors" className="text-gray-400">
+              <label htmlFor="colors" className="input-label">
                 Choose Color
               </label>
               <TwitterPicker className="mt-3" onChangeComplete={saveColors} />
@@ -267,7 +302,8 @@ const CreateProduct = () => {
             <div className="w-full p-3">
               <input
                 type="submit"
-                value="Save Product"
+                value={response.isLoading ? 'Loading...' : 'Save Product'}
+                disabled={response.isLoading ? true : false}
                 className="btn-dark py-2 -my-2"
               />
             </div>
