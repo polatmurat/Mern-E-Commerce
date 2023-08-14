@@ -149,6 +149,30 @@ class ProductController {
         }
     };
 
+    // async updateProduct(req, res) {
+    //     const errors = validationResult(req);
+    //     console.log(req.body.description, " DESC");
+
+    //     if (errors.isEmpty()) {
+    //         try {
+    //             const { _id, title, price, stock, discount, colors, sizes, description, category } = req.body;
+    //             const objID = new ObjectId(_id);
+    //             const client = await connect();
+    //             const productCollection = client.db('ecommerce').collection('product');
+
+    //             const response = await productCollection.updateOne({ _id: objID }, { $set: { title, price, discount, category, stock, colors, sizes, description, updatedAt: new Date() } });
+    //             return res.status(200).json({ msg: 'The product has been updated successfully.', response });
+    //         } catch (error) {
+    //             console.log(error.message);
+    //             return res.status(500).json({ errors: error });
+    //         }
+
+    //     } else {
+    //         return res.status(400).json({ errors: errors.array() });
+    //     }
+
+    // };
+
     async updateProduct(req, res) {
         const errors = validationResult(req);
 
@@ -174,28 +198,28 @@ class ProductController {
     };
 
     async deleteProduct(req, res) {
-        const {id} = req.params;
+        const { id } = req.params;
         try {
             const objID = new ObjectId(id);
             const client = await connect();
             const productCollection = client.db('ecommerce').collection('product');
-            const product = await productCollection.findOne({_id: objID});
-            
-            [1,2,3].forEach((number) => {
+            const product = await productCollection.findOne({ _id: objID });
+
+            [1, 2, 3].forEach((number) => {
                 let key = `image${number}`;
                 let image = product[key];
                 let __dirname = path.resolve();
                 let imagePath = __dirname + `/../client/public/images/${image}`;
                 fs.unlink(imagePath, (err) => {
-                    if(err) {
+                    if (err) {
                         throw new Error(err);
 
                     }
                 })
             })
-            
-            await productCollection.deleteOne({_id: objID});
-            return res.status(200).json({msg: 'Product has been deleted successfully'});
+
+            await productCollection.deleteOne({ _id: objID });
+            return res.status(200).json({ msg: 'Product has been deleted successfully' });
         } catch (error) {
             throw new Error(error.message);
         }

@@ -20,9 +20,9 @@ const Products = () => {
   }
 
   const { data = [], isFetching } = useGetProductsQuery(page ? page : 1);
-  console.log(data);
 
   const { success } = useSelector((state) => state.globalReducer);
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,8 +42,6 @@ const Products = () => {
       deleteProduct(prodID);
     }
   };
-
-  console.log(data);
 
   return (
     <Wrapper>

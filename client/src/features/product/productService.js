@@ -8,7 +8,7 @@ const productService = createApi({
         prepareHeaders: (headers, { getState }) => {
             const reducers = getState();
             const token = reducers?.authReducer?.adminToken;
-            console.log(token);
+            // console.log(token);
             headers.set('authorization', token ? `Bearer ${token}` : '');
             return headers;
         }

@@ -10,7 +10,6 @@ import parser from 'html-react-parser';
 import ScreenHeader from "../../components/ScreenHeader";
 import { useAllCategoriesQuery } from "../../features/category/categoryService";
 import {
-  useCreateProductMutation,
   useFetchProductQuery,
   useUpdateProductMutation,
 } from "../../features/product/productService";
@@ -28,8 +27,6 @@ const UpdateProduct = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  console.log(product);
 
   const { data = [], isFetching } = useAllCategoriesQuery();
 
@@ -90,9 +87,7 @@ const UpdateProduct = () => {
 
   const createProd = (e) => {
     e.preventDefault();
-    
-    console.log("create prod ", state);
-    
+        
     updateProduct(state);
   };
 
@@ -110,8 +105,6 @@ const UpdateProduct = () => {
       navigate("/dashboard/products");
     }
   }, [response?.isSuccess]);
-
-  console.log(product);
 
   useEffect(() => {
     setState({...state, description: value});
