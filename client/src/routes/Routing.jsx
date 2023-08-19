@@ -8,11 +8,20 @@ import CreateCategory from "../pages/dashboard/CreateCategory";
 import UpdateCategory from "../pages/dashboard/UpdateCategory";
 import CreateProduct from "../pages/dashboard/CreateProduct";
 import UpdateProduct from "../pages/dashboard/UpdateProduct";
+import Home from "../pages/home/Home";
+import Login from "../pages/home/auth/Login";
+import Register from "../pages/home/auth/Register";
+import Dashboard from "../pages/users/Dashboard";
+
 
 const Routing = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="user" element={<Dashboard />} />
         <Route path="auth">
           <Route
             path="login-admin"

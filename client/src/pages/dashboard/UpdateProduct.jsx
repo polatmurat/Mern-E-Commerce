@@ -6,7 +6,7 @@ import { TwitterPicker } from "react-color";
 import { v4 as uuidv4 } from "uuid";
 import Spinner from "../../components/Spinner";
 import toast, { Toaster } from "react-hot-toast";
-import parser from 'html-react-parser';
+import ReactHtmlParser  from 'html-react-parser';
 import ScreenHeader from "../../components/ScreenHeader";
 import { useAllCategoriesQuery } from "../../features/category/categoryService";
 import {
@@ -114,7 +114,8 @@ const UpdateProduct = () => {
     if (!fetching) {
       setState(product.product);
       setSizeList(product.product.sizes);
-      setValue(parser(product.product.description));
+      setValue(ReactHtmlParser(product.product.description));
+      // setValue(product.product.description);
     }
   }, [product]);
 

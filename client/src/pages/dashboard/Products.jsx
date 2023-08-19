@@ -98,7 +98,7 @@ const Products = () => {
                         <img
                           src={`/images/${product.image1}`}
                           alt="image name"
-                          className="w-20 h-20 rounded-md object-cover "
+                          className="w-20 h-20 rounded-md object-cover"
                         />
                       </td>
                       <td className="p-3 capitalize text-sm font-normal text-gray-400">

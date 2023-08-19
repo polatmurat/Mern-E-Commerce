@@ -43,4 +43,40 @@
   .input-label {
     @apply text-gray-400 mb-2 block;
   }
+  .container {
+    @apply max-w-screen-xl w-full mx-auto px-6;
+  }
+  .nav__item {
+    @apply ml-8; 
+  }
+  .nav__link {
+    @apply text-base font-medium;
+  }
+  .nav__circle {
+    @apply flex justify-center items-center w-[22px] h-[22px] rounded-full bg-indigo-600 text-xs text-white font-medium absolute -top-1 -right-3;
+  }
+  .header {
+    @apply w-full h-[300px] bg-[url('./assets/images/header.jpg')] bg-no-repeat bg-cover relative -z-10;
+  }
+  .header-cover {
+    @apply absolute inset-0 w-full h-full bg-black/40;
+  }
+  .flex-y {
+    @apply flex items-center;
+  }
+  .header-heading {
+    @apply text-white text-2xl capitalize font-medium;
+  }
+  .heading {
+    @apply text-lg capitalize font-medium;
+  }
+  .form-label {
+    @apply block mb-1.5 text-sm font-medium capitalize text-gray-700; 
+  }
+  .form-input {
+    @apply w-full border px-3 py-3 border-gray-300 rounded-md outline-none;
+  }
+  .error {
+    @apply block mt-1.5 text-rose-600 font-medium text-sm;
+  }
 }

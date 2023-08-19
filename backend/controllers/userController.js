@@ -27,7 +27,7 @@ const register = async (req, res) => {
 
                 return res.status(201).json({ msg: 'User registered successfully.', token: token });
             } else {
-                return res.status(401).json({ errors: [{ msg: `${email} is already taken.` }] });
+                return res.status(400).json({ errors: [{ msg: `${email} is already taken.`, path: 'email' }] });
             }
         } catch (error) {
             console.log(error.message);
@@ -62,10 +62,10 @@ const login = async (req, res) => {
                         return res.status(201).json({ token, admin: false });
                     }
                 } else {
-                    return res.status(400   ).json({ errors: [{ 'msg': 'Password not matched. Login Failure!' }] })
+                    return res.status(400).json({ errors: [{ 'msg': 'Password not matched. Login Failure!', path: 'password' }] })
                 }
             } else {
-                return res.status(400).json({ errors: [{ 'msg': `${email} is not found!` }] });
+                return res.status(400).json({ errors: [{ 'msg': `${email} is not found!`, path: 'email' }] });
             }
 
         } catch (error) {
