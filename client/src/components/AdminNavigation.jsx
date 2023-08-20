@@ -5,7 +5,7 @@ import { BsFilterLeft } from "react-icons/bs";
 const AdminNavigation = ({ openSidebar }) => {
   const dispatch = useDispatch();
   const adminLogout = () => {
-    dispatch(logout());
+    dispatch(logout('admin-token'));
   };
   return (
     <nav className="fixed left-0 sm:left-64 top-4 right-0">

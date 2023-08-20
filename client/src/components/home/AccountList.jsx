@@ -1,8 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { BsPersonCircle } from "react-icons/bs";
 import { AiOutlineShoppingCart, AiOutlineLogout } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { logout } from "../../app/reducers/authReducer";
 
 const AccountList = () => {
+
+  const dispatch = useDispatch();
+
   return (
     <>
     <NavLink to="/user" className="account-list">
@@ -13,7 +18,7 @@ const AccountList = () => {
         <AiOutlineShoppingCart size={22} />
         <span className="account-list__title">Orders</span>
     </NavLink>
-    <span className="account-list cursor-pointer">
+    <span className="account-list cursor-pointer" onClick={() => dispatch(logout('user-token'))}>
         <AiOutlineLogout size={22} />
         <span className="account-list__title">Logout</span>
     </span>

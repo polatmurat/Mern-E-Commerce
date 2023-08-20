@@ -12,16 +12,21 @@ import Home from "../pages/home/Home";
 import Login from "../pages/home/auth/Login";
 import Register from "../pages/home/auth/Register";
 import Dashboard from "../pages/users/Dashboard";
-
+import UserRoute from "./UserRoute";
+import UserAuthRoute from "./UserAuthRoute";
 
 const Routing = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="user" element={<Dashboard />} />
+        <Route element={<UserAuthRoute />}>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
+        <Route element={<UserRoute />}>
+          <Route path="user" element={<Dashboard />} />
+        </Route>
         <Route path="auth">
           <Route
             path="login-admin"
