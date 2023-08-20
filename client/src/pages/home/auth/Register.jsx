@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { setUserToken } from "../../../app/reducers/authReducer";
 import { setSuccess } from "../../../app/reducers/globalReducer";
 import { useForm } from "../../../hooks/Form";
+import { ShowError } from "../../../utils/ShowError";
 
 const Register = () => {
   const [errors, setErrors] = useState([]);
@@ -18,7 +19,7 @@ const Register = () => {
   //   password: "",
   // });
 
-  const {state, onChange} = useForm({
+  const { state, onChange } = useForm({
     name: "",
     email: "",
     password: "",
@@ -87,14 +88,16 @@ const Register = () => {
                   name="name"
                   id="name"
                   className={`form-input ${
-                    showErrors("name") ? "border-rose-600" : "border-gray-300"
+                    ShowError(errors, "name")
+                      ? "border-rose-600"
+                      : "border-gray-300"
                   }`}
                   placeholder="Name..."
                   value={state.name}
                   onChange={onChange}
                 />
                 {showErrors("name") && (
-                  <span className="error">{showErrors("name")}</span>
+                  <span className="error">{ShowError(errors, "name")}</span>
                 )}
               </div>
               <div className="mb-4">
@@ -106,14 +109,16 @@ const Register = () => {
                   name="email"
                   id="email"
                   className={`form-input ${
-                    showErrors("email") ? "border-rose-600" : "border-gray-300"
+                    ShowError(errors, "email")
+                      ? "border-rose-600"
+                      : "border-gray-300"
                   }`}
                   placeholder="E-mail..."
                   value={state.email}
                   onChange={onChange}
                 />
-                {showErrors("email") && (
-                  <span className="error">{showErrors("email")}</span>
+                {ShowError(errors, "email") && (
+                  <span className="error">{ShowError(errors, "email")}</span>
                 )}
               </div>
               <div className="mb-4">
@@ -125,7 +130,7 @@ const Register = () => {
                   name="password"
                   id="password"
                   className={`form-input ${
-                    showErrors("password")
+                    ShowError(errors, "password")
                       ? "border-rose-600"
                       : "border-gray-300"
                   }`}
@@ -133,8 +138,8 @@ const Register = () => {
                   value={state.password}
                   onChange={onChange}
                 />
-                {showErrors("password") && (
-                  <span className="error">{showErrors("password")}</span>
+                {ShowError(errors, "password") && (
+                  <span className="error">{ShowError(errors, "password")}</span>
                 )}
               </div>
               <div className="mb-4">

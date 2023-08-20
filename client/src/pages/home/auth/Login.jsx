@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUserToken } from "../../../app/reducers/authReducer";
 import { useForm } from "../../../hooks/Form";
+import { ShowError } from "../../../utils/ShowError";
 
 const Login = () => {
   const [errors, setErrors] = useState([]);
@@ -40,15 +41,6 @@ const Login = () => {
     }
   });
 
-  const showErrors = (name) => {
-    const exist = errors.find((err) => err.path === name);
-    if (exist) {
-      return exist.msg;
-    } else {
-      return false;
-    }
-  };
-
   return (
     <>
       <Nav />
@@ -74,14 +66,16 @@ const Login = () => {
                   name="email"
                   id="email"
                   className={`form-input ${
-                    showErrors("email") ? "border-rose-600" : "border-gray-300"
+                    ShowError(errors, "email")
+                      ? "border-rose-600"
+                      : "border-gray-300"
                   }`}
                   placeholder="E-mail..."
                   onChange={onChange}
                   value={state.email}
                 />
-                {showErrors("email") && (
-                  <span className="error">{showErrors("email")}</span>
+                {ShowError(errors, "email") && (
+                  <span className="error">{ShowError(errors, "email")}</span>
                 )}
               </div>
               <div className="mb-4">
@@ -93,7 +87,7 @@ const Login = () => {
                   name="password"
                   id="password"
                   className={`form-input ${
-                    showErrors("password")
+                    ShowError(errors, "password")
                       ? "border-rose-600"
                       : "border-gray-300"
                   }`}
@@ -101,8 +95,8 @@ const Login = () => {
                   onChange={onChange}
                   value={state.password}
                 />
-                {showErrors("password") && (
-                  <span className="error">{showErrors("password")}</span>
+                {ShowError(errors, "password") && (
+                  <span className="error">{ShowError(errors, "password")}</span>
                 )}
               </div>
               <div className="mb-4">
