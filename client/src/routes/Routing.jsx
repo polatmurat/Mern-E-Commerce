@@ -14,12 +14,15 @@ import Register from "../pages/home/auth/Register";
 import Dashboard from "../pages/users/Dashboard";
 import UserRoute from "./UserRoute";
 import UserAuthRoute from "./UserAuthRoute";
+import CategoryProducts from "../pages/home/CategoryProducts";
 
 const Routing = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/category-products/:name" element={<CategoryProducts />} />
+        <Route path="/category-products/:name/:page" element={<CategoryProducts />} />
         <Route element={<UserAuthRoute />}>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />

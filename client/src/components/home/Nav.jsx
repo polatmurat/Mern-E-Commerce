@@ -7,15 +7,16 @@ const Nav = () => {
   const {userToken, user} = useSelector((state) => state.authReducer)
 
   return (
-    <nav className="w-full h-[70px] flex items-center shadow-md fixed top-0 right-0 left-0">
+    <nav className="w-full h-[70px] flex items-center shadow-md fixed top-0 right-0 left-0 z-50">
       <div className="container">
         <div className="flex justify-between items-center">
           <Link to="/">
-            <img
+            {/* <img
               src="./logo.jpg"
               className="h-[70px] w-[130px] rounded-md object-cover"
               alt="logo"
-            />
+            /> */}
+          <h1>E-Commerce</h1>
           </Link>
           <ul className="flex items-center">
             <li className="nav__item cursor-pointer">

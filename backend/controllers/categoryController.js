@@ -139,7 +139,7 @@ const getAllCategories = async (req, res) => {
     const categoryCollection = client.db('ecommerce').collection('category');
     const categoriesCursor = categoryCollection.find({}); // Get the cursor
     const categories = await categoriesCursor.toArray(); // Convert the cursor to an array, await is important :)
-    return res.status(200).json({categories});
+    return res.status(200).json({ categories });
 
   } catch (error) {
     console.log(error.message);
@@ -147,4 +147,19 @@ const getAllCategories = async (req, res) => {
   }
 };
 
-module.exports = { createCategory, fetchCategory, updateCategory, deleteCategory, categories, getAllCategories };
+const randomCategories = async (req, res) => {
+  try {
+    const client = await connect();
+    const categoryCollection = client.db('ecommerce').collection('category');
+    
+    // Perform aggregation to sample categories
+    const categories = await categoryCollection.aggregate([
+      { $sample: { size: 3 } }
+    ]).toArray();
+
+    return res.status(200).json({ categories });
+  } catch (error) {
+    return res.status(500).json('Internal server error.');
+  }
+};
+module.exports = { createCategory, fetchCategory, updateCategory, deleteCategory, categories, getAllCategories, randomCategories };
