@@ -112,6 +112,7 @@ const UpdateProduct = () => {
 
   useEffect(() => {
     if (!fetching) {
+      console.log(product);
       setState(product.product);
       setSizeList(product.product.sizes);
       setValue(ReactHtmlParser(product.product.description));

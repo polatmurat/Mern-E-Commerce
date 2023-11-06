@@ -59,7 +59,6 @@ const fetchCategory = async (req, res) => {
   }
 
   try {
-    console.log('Requested ID:', id);
     const objID = new ObjectId(id);
     console.log('Converted ObjectId:', objID);
     const client = await connect();
