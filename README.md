@@ -1,6 +1,6 @@
 # mern e-Commerce
 
-![](https://github.com/polatmurat/Mern-E-Commerce/blob/main/previewProject.gif)
+![](https://github.com/polatmurat/Mern-E-Commerce/blob/main/VID_20240505_004858.gif)
 
 The e-commerce system I have developed is based on the MERN (MongoDB, Express.js, React, and Node.js) stack philosophy, compiled from the tutorials I have been following. It includes React, Redux, Express JS, and NodeJS as its core technologies. Additionally, Redux Toolkit Query is used for data binding, and the code is open to modifications; I will consider pull requests. Feel free to provide code improvements or any questions that come to your mind!
 
